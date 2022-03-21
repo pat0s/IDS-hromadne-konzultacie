@@ -29,7 +29,7 @@ CREATE TABLE Album (
     cislo INTEGER NOT NULL,
     nazov VARCHAR (30),
     datum DATE,
-    id_hudobnik INTEGER,
+    id_hudobnik INTEGER NOT NULL,
 
     CONSTRAINT FK_id_hudobnik_album FOREIGN KEY (id_hudobnik) REFERENCES Hudobnik,
     CONSTRAINT PK_cislo PRIMARY KEY (cislo)
@@ -53,7 +53,8 @@ CREATE TABLE Hra (
 
     CONSTRAINT FK_nazov_hra FOREIGN KEY (nazov, stupnica) REFERENCES Hudobny_Nastroj,
     CONSTRAINT FK_id_hudobnik_hra FOREIGN KEY (id_hudobnik) REFERENCES Hudobnik,
-    CONSTRAINT FK_id_skladba_hra FOREIGN KEY (id_skladba) REFERENCES Skladba
+    CONSTRAINT FK_id_skladba_hra FOREIGN KEY (id_skladba) REFERENCES Skladba,
+    CONSTRAINT Pk_hra PRIMARY KEY (nazov, stupnica, id_hudobnik, id_skladba)
 );
 
 CREATE TABLE Ovlada (
@@ -63,7 +64,7 @@ CREATE TABLE Ovlada (
 
     CONSTRAINT FK_nazov_ovlada FOREIGN KEY (nazov, stupnica) REFERENCES Hudobny_Nastroj,
     CONSTRAINT FK_id_hudobnik_ovlada FOREIGN KEY (id_hudobnik) REFERENCES Hudobnik,
-    CONSTRAINT PK_hudobnik_nastroj_ovlada PRIMARY KEY (id_hudobnik, nazov)
+    CONSTRAINT PK_hudobnik_nastroj_ovlada PRIMARY KEY (id_hudobnik, nazov, stupnica)
 );
 
 CREATE TABLE Nosic (
